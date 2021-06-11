@@ -76,11 +76,11 @@ namespace MyJetWallet.Sdk.RestApiTrace
             var sessionId = claims.FirstOrDefault(e => e.Type == AuthorizationConst.SessionRootIdClaim);
             var tokenId = claims.FirstOrDefault(e => e.Type == AuthorizationConst.SessionTokenIdClaim);
 
-            if (brokerId != null) item[AuthorizationConst.BrokerIdClaim] = brokerId;
-            if (clientId != null) item[AuthorizationConst.ClientIdClaim] = clientId;
-            if (brandId != null) item[AuthorizationConst.BrandIdClaim] = brandId;
-            if (sessionId != null) item[AuthorizationConst.SessionRootIdClaim] = sessionId;
-            if (tokenId != null) item[AuthorizationConst.SessionTokenIdClaim] = tokenId;
+            if (brokerId != null) item[AuthorizationConst.BrokerIdClaim] = brokerId.Value;
+            if (clientId != null) item[AuthorizationConst.ClientIdClaim] = clientId.Value;
+            if (brandId != null) item[AuthorizationConst.BrandIdClaim] = brandId.Value;
+            if (sessionId != null) item[AuthorizationConst.SessionRootIdClaim] = sessionId.Value;
+            if (tokenId != null) item[AuthorizationConst.SessionTokenIdClaim] = tokenId.Value;
 
             var activity = Activity.Current;
             if (activity != null)
