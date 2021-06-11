@@ -6,6 +6,7 @@ using Autofac;
 using Microsoft.Extensions.Logging;
 using MyJetWallet.Sdk.Service;
 using MyJetWallet.Sdk.Service.Tools;
+using Newtonsoft.Json;
 
 namespace MyJetWallet.Sdk.RestApiTrace
 {
@@ -15,13 +16,13 @@ namespace MyJetWallet.Sdk.RestApiTrace
 
         private readonly LogElkSettings _elkSettings;
         private readonly string _elkIndexPrefix;
-        private readonly ILogger<ApiTraceManager> _logger;
+        private readonly ILogger _logger;
         private readonly MyTaskTimer _timer;
 
         private List<ApiTraceItem> _data = new(MaxCountInCache);
         private readonly object _gate = new();
 
-        public ApiTraceManager(LogElkSettings elkSettings, string elkIndexPrefix, ILogger<ApiTraceManager> logger)
+        public ApiTraceManager(LogElkSettings elkSettings, string elkIndexPrefix, ILogger logger)
         {
             _elkSettings = elkSettings;
             _elkIndexPrefix = elkIndexPrefix;
@@ -44,7 +45,7 @@ namespace MyJetWallet.Sdk.RestApiTrace
 
             foreach (var item in data)
             {
-                Console.WriteLine($"api trace. Path: {item.Path()}");
+                Console.WriteLine($"api trace:\n{JsonConvert.SerializeObject(item, Formatting.Indented)}");
             }
         }
 
