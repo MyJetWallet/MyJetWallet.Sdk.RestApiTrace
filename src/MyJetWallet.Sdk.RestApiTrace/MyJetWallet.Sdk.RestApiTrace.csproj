@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="MyJetWallet.Sdk.Authorization" Version="1.0.26" />
     <PackageReference Include="MyJetWallet.Sdk.Service" Version="1.5.3" />
-    <PackageReference Include="SimpleTrading.ClientApi" Version="1.0.17" />
+    <PackageReference Include="SimpleTrading.ClientApi" Version="1.0.18" />
   </ItemGroup>
 
 </Project>
