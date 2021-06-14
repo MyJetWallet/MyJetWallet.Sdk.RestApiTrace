@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using MyJetWallet.Sdk.Authorization;
+using MyJetWallet.Sdk.Service;
 using SimpleTrading.ClientApi.Utils;
 
 namespace MyJetWallet.Sdk.RestApiTrace
@@ -43,6 +44,8 @@ namespace MyJetWallet.Sdk.RestApiTrace
             finally
             {
                 sw.Stop();
+
+                using var activity = MyTelemetry.StartActivity("api-trace-log");
 
                 var request = context.Request;
                 var response = context.Response;
@@ -96,6 +99,8 @@ namespace MyJetWallet.Sdk.RestApiTrace
             {
                 item.Span_Id = activity.SpanId.ToString();
                 item.Trace_Id = activity.TraceId.ToString();
+                var wallet = activity.GetBaggageItem("walletId");
+                item.WalletId = wallet ?? "";
             }
         }
     }
