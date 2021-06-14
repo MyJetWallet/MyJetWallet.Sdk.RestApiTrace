@@ -47,22 +47,31 @@ namespace MyJetWallet.Sdk.RestApiTrace
                 var request = context.Request;
                 var response = context.Response;
 
-                var item = ApiTraceItem.Create()
-                    .LogRestCall(
-                        request.Method,
-                        request.Host.ToString(),
-                        request.Path,
-                        ex == null ? (HttpStatusCode) response.StatusCode : HttpStatusCode.InternalServerError,
-                        sw.ElapsedMilliseconds,
-                        context.GetUserAgent())
-                    .ApplyException(ex)
-                    .IP(context.GetIp());
+                string path = request.Path;
 
-                ParseActivityAndClient(context, item);
+                if (path.Contains("api") &&
+                    !path.Contains("isalive") &&
+                    !path.Contains("metrics") &&
+                    !path.Contains("dependencies") &&
+                    !path.Contains("dependencies"))
+                {
+                    var item = ApiTraceItem.Create()
+                        .LogRestCall(
+                            request.Method,
+                            request.Host.ToString(),
+                            path,
+                            ex == null ? (HttpStatusCode) response.StatusCode : HttpStatusCode.InternalServerError,
+                            sw.ElapsedMilliseconds,
+                            context.GetUserAgent())
+                        .ApplyException(ex)
+                        .IP(context.GetIp());
 
-                ContextHandlerCallback?.Invoke(context, item);
+                    ParseActivityAndClient(context, item);
 
-                _apiTraceManager.LogMethodCall(item);
+                    ContextHandlerCallback?.Invoke(context, item);
+
+                    _apiTraceManager.LogMethodCall(item);
+                }
             }
         }
 
