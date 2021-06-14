@@ -61,33 +61,22 @@ namespace MyJetWallet.Sdk.RestApiTrace
                 _data = new List<ApiTraceItem>(MaxCountInCache);
             }
 
-            using (var activity = MyTelemetry.StartActivity("Write trace to ELK"))
+            using var activity = MyTelemetry.StartActivity("Write trace to ELK");
+            try
             {
-                try
-                {
-                    activity.AddTag("count", data.Count);
+                activity.AddTag("count", data.Count);
 
-                    var resp = await _client.IndexManyAsync(data, IndexName());
+                var resp = await _client.IndexManyAsync(data, IndexName());
 
-                    resp.IsValid.AddToActivityAsTag("is-valid");
-                    resp.Errors.AddToActivityAsTag("errors");
+                resp.IsValid.AddToActivityAsTag("is-valid");
+                resp.Errors.AddToActivityAsTag("errors");
 
-                    if (resp.Errors)
-                        resp.ItemsWithErrors.Count().AddToActivityAsTag("count-with-errors");
-
-                    Console.WriteLine($"Cannot Send trace to ELK: {resp.IsValid} {resp.Errors}");
-                }
-                catch (Exception ex)
-                {
-                    ex.FailActivity();
-                    Console.WriteLine($"Cannot Send trace to ELK:\n{ex.ToString()}");
-                }
+                if (resp.Errors)
+                    resp.ItemsWithErrors.Count().AddToActivityAsTag("count-with-errors");
             }
-
-
-            foreach (var item in data)
+            catch (Exception ex)
             {
-                Console.WriteLine($"api trace:\n{JsonConvert.SerializeObject(item, Formatting.Indented)}");
+                ex.FailActivity();
             }
         }
 
