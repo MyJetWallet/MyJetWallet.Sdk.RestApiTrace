@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyJetWallet.Sdk.RestApiTrace", "src\MyJetWallet.Sdk.RestApiTrace\MyJetWallet.Sdk.RestApiTrace.csproj", "{77DA1B76-0ABE-49C7-B48E-E6032F669E0A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "src\TestApp\TestApp.csproj", "{25E6C997-9C35-4360-8B97-3F3499F61F33}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{77DA1B76-0ABE-49C7-B48E-E6032F669E0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77DA1B76-0ABE-49C7-B48E-E6032F669E0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77DA1B76-0ABE-49C7-B48E-E6032F669E0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25E6C997-9C35-4360-8B97-3F3499F61F33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25E6C997-9C35-4360-8B97-3F3499F61F33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25E6C997-9C35-4360-8B97-3F3499F61F33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25E6C997-9C35-4360-8B97-3F3499F61F33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

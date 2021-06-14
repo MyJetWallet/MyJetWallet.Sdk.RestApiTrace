@@ -53,5 +53,11 @@ namespace MyJetWallet.Sdk.RestApiTrace
             item["IP"] = ip;
             return item;
         }
+
+        public static ApiTraceItem AddField(this ApiTraceItem item, string name, string value)
+        {
+            item[name] = value;
+            return item;
+        }
     }
 }

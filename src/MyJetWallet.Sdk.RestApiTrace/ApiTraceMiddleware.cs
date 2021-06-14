@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
@@ -28,6 +29,7 @@ namespace MyJetWallet.Sdk.RestApiTrace
         {
             var sw = new Stopwatch();
             Exception ex = null;
+
             sw.Start();
             try
             {
@@ -43,16 +45,14 @@ namespace MyJetWallet.Sdk.RestApiTrace
                 sw.Stop();
 
                 var request = context.Request;
-                var responce = context.Response;
-
-                
+                var response = context.Response;
 
                 var item = ApiTraceItem.Create()
                     .LogRestCall(
                         request.Method,
                         request.Host.ToString(),
                         request.Path,
-                        ex == null ? (HttpStatusCode)responce.StatusCode : HttpStatusCode.InternalServerError,
+                        ex == null ? (HttpStatusCode) response.StatusCode : HttpStatusCode.InternalServerError,
                         sw.ElapsedMilliseconds,
                         context.GetUserAgent())
                     .ApplyException(ex)
