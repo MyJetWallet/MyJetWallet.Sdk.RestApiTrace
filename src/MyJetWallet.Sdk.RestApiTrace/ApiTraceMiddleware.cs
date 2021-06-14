@@ -76,17 +76,17 @@ namespace MyJetWallet.Sdk.RestApiTrace
             var sessionId = claims.FirstOrDefault(e => e.Type == AuthorizationConst.SessionRootIdClaim);
             var tokenId = claims.FirstOrDefault(e => e.Type == AuthorizationConst.SessionTokenIdClaim);
 
-            if (brokerId != null) item[AuthorizationConst.BrokerIdClaim] = brokerId.Value;
-            if (clientId != null) item[AuthorizationConst.ClientIdClaim] = clientId.Value;
-            if (brandId != null) item[AuthorizationConst.BrandIdClaim] = brandId.Value;
-            if (sessionId != null) item[AuthorizationConst.SessionRootIdClaim] = sessionId.Value;
-            if (tokenId != null) item[AuthorizationConst.SessionTokenIdClaim] = tokenId.Value;
+            if (brokerId != null) item.BrokerId = brokerId.Value;
+            if (clientId != null) item.ClientId = clientId.Value;
+            if (brandId != null) item.BrandId = brandId.Value;
+            if (sessionId != null) item.SessionRootId = sessionId.Value;
+            if (tokenId != null) item.SessionTokenId = tokenId.Value;
 
             var activity = Activity.Current;
             if (activity != null)
             {
-                item["Span_Id"] = activity.SpanId.ToString();
-                item["Trace_Id"] = activity.TraceId.ToString();
+                item.Span_Id = activity.SpanId.ToString();
+                item.Trace_Id = activity.TraceId.ToString();
             }
         }
     }

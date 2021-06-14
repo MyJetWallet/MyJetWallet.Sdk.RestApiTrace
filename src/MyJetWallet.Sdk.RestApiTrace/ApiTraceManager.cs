@@ -67,7 +67,7 @@ namespace MyJetWallet.Sdk.RestApiTrace
                 {
                     activity.AddTag("count", data.Count);
 
-                    var resp = await _client.IndexManyAsync(data);
+                    var resp = await _client.IndexManyAsync(data, IndexName());
 
                     resp.IsValid.AddToActivityAsTag("is-valid");
                     resp.Errors.AddToActivityAsTag("errors");
@@ -114,6 +114,7 @@ namespace MyJetWallet.Sdk.RestApiTrace
             var connectionPool = new SniffingConnectionPool(uris);
             var settings = new ConnectionSettings(connectionPool)
                 .BasicAuthentication(_elkSettings.User, _elkSettings.Password)
+                .ServerCertificateValidationCallback(CertificateValidations.AllowAll)
                 .DefaultIndex(_elkIndexPrefix);
 
             //var settings = new ConnectionSettings(uris.First())

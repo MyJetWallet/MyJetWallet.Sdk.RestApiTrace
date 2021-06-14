@@ -20,7 +20,7 @@ namespace TestApp
             settings.Urls["node2"] = "https://192.168.11.5:9200";
             settings.Urls["node3"] = "https://192.168.11.6:9200";
             settings.User = "spot";
-            settings.User = "63glAuxUz7h6TUbIR79TOVVcp9vX0id2";
+            settings.Password = "63glAuxUz7h6TUbIR79TOVVcp9vX0id2";
 
             using ILoggerFactory loggerFactory =
                 LoggerFactory.Create(builder =>
