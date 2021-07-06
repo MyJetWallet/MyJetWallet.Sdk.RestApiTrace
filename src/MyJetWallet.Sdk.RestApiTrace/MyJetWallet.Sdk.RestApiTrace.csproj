@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MyJetWallet.Sdk.Authorization" Version="1.0.29" />
+    <PackageReference Include="MyJetWallet.Sdk.Authorization" Version="1.1.0" />
     <PackageReference Include="MyJetWallet.Sdk.Service" Version="1.5.5" />
-    <PackageReference Include="NEST" Version="7.13.1" />
+    <PackageReference Include="NEST" Version="7.13.2" />
     <PackageReference Include="SimpleTrading.ClientApi" Version="1.0.18" />
   </ItemGroup>
 
