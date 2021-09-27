@@ -53,6 +53,27 @@ namespace MyJetWallet.Sdk.RestApiTrace
 
         private async Task HandleTraces()
         {
+            if (_client == null)
+            {
+                var uris = _elkSettings.Urls.Select(e => new Uri(e.Value)).ToArray();
+
+
+                var connectionPool = new SniffingConnectionPool(uris);
+                var settings = new ConnectionSettings(connectionPool)
+                    .ServerCertificateValidationCallback(CertificateValidations.AllowAll)
+                    .DefaultIndex(_elkIndexPrefix);
+
+                if (!string.IsNullOrEmpty(_elkSettings.User) && !string.IsNullOrEmpty(_elkSettings.Password))
+                {
+                    settings = settings.BasicAuthentication(_elkSettings.User, _elkSettings.Password);
+                }
+
+                _client = new ElasticClient(settings);
+                _logger.LogInformation("ELK client for api trace is created.");
+                Console.WriteLine("=== ELK client for api trace is created. ===");
+            }
+            
+            
             List<ApiTraceItem> data;
             lock (_gate)
             {
@@ -101,26 +122,11 @@ namespace MyJetWallet.Sdk.RestApiTrace
 
         public void Start()
         {
-            if (_elkSettings.Urls?.Any() != true)
+            if (_elkSettings.Urls?.Any() != true || string.IsNullOrWhiteSpace(_elkSettings.Urls.First().Value))
             {
                 Console.WriteLine("=== API TRACE IS DISABLE, elt node urls is empty ===");
                 return;
             }
-            
-            var uris = _elkSettings.Urls.Select(e => new Uri(e.Value)).ToArray();
-
-
-            var connectionPool = new SniffingConnectionPool(uris);
-            var settings = new ConnectionSettings(connectionPool)
-                .ServerCertificateValidationCallback(CertificateValidations.AllowAll)
-                .DefaultIndex(_elkIndexPrefix);
-
-            if (!string.IsNullOrEmpty(_elkSettings.User) && !string.IsNullOrEmpty(_elkSettings.Password))
-            {
-                settings = settings.BasicAuthentication(_elkSettings.User, _elkSettings.Password);
-            }
-
-            _client = new ElasticClient(settings);
 
             _timer.Start();
 
