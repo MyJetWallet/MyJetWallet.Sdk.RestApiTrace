@@ -58,6 +58,9 @@ namespace MyJetWallet.Sdk.RestApiTrace
                     !path.Contains("dependencies") &&
                     !path.Contains("dependencies"))
                 {
+                    if (!request.Headers.TryGetValue("cf-ipcountry", out var cnCode))
+                        cnCode = string.Empty;
+                    
                     var item = ApiTraceItem.Create()
                         .LogRestCall(
                             request.Method,
@@ -67,7 +70,7 @@ namespace MyJetWallet.Sdk.RestApiTrace
                             sw.ElapsedMilliseconds,
                             context.GetUserAgent())
                         .ApplyException(ex)
-                        .IP(context.GetIp());
+                        .IP(context.GetIp(), cnCode);
 
                     ParseActivityAndClient(context, item);
 

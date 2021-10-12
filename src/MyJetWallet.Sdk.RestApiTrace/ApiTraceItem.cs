@@ -28,6 +28,7 @@ namespace MyJetWallet.Sdk.RestApiTrace
         public string ClientId { get; set; }
         public string WalletId { get; set; }
         public string IP { get; set; }
+        public string IPCountry { get; set; }
 
 
         public string SessionRootId { get; set; }

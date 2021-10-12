@@ -45,9 +45,10 @@ namespace MyJetWallet.Sdk.RestApiTrace
             return item;
         }
 
-        public static ApiTraceItem IP(this ApiTraceItem item, string ip)
+        public static ApiTraceItem IP(this ApiTraceItem item, string ip, string country)
         {
             item.IP = ip;
+            item.IPCountry = country;
             return item;
         }
     }
