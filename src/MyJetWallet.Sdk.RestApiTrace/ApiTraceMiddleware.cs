@@ -50,7 +50,12 @@ namespace MyJetWallet.Sdk.RestApiTrace
                 var request = context.Request;
                 var response = context.Response;
 
+                var clientId = context.User.Identity?.Name;
+                clientId.AddToActivityAsTag("clientId");
+
                 string path = request.Path;
+
+                path.AddToActivityAsTag("path");
 
                 if (path.Contains("api") &&
                     !path.Contains("isalive") &&
@@ -70,7 +75,8 @@ namespace MyJetWallet.Sdk.RestApiTrace
                             sw.ElapsedMilliseconds,
                             context.GetUserAgent())
                         .ApplyException(ex)
-                        .IP(context.GetIp(), cnCode);
+                        .IP(context.GetIp(), cnCode)
+                        .ClientIdentity(string.Empty, string.Empty, clientId);
 
                     ParseActivityAndClient(context, item);
 
