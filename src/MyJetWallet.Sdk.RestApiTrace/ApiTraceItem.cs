@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using MyJetWallet.Sdk.Service;
 using Nest;
+using Newtonsoft.Json;
 
 namespace MyJetWallet.Sdk.RestApiTrace
 {
     public class ApiTraceItem 
     {
+        [JsonProperty("@timestamp")]
         [PropertyName("@timestamp")]
         public DateTime timestamp { get; set; }
         public DateTime DateTime { get; set; }

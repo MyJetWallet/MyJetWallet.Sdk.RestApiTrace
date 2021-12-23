@@ -82,6 +82,8 @@ namespace MyJetWallet.Sdk.RestApiTrace
 
                     ContextHandlerCallback?.Invoke(context, item);
 
+                    Console.WriteLine($"Detect call: {item.Path}");
+                    
                     _apiTraceManager.LogMethodCall(item);
                 }
             }

@@ -89,13 +89,20 @@ namespace MyJetWallet.Sdk.RestApiTrace
             {
                 activity.AddTag("count", data.Count);
 
-                var resp = await _client.IndexManyAsync(data, IndexName());
+                var index = IndexName();
 
-                resp.IsValid.AddToActivityAsTag("is-valid");
-                resp.Errors.AddToActivityAsTag("errors");
-
-                if (resp.Errors)
-                    resp.ItemsWithErrors.Count().AddToActivityAsTag("count-with-errors");
+                foreach (var item in data)
+                {
+                    var res = await _client.IndexAsync(item, descriptor => descriptor.Index(index));
+                    if (!res.IsValid)
+                        Console.WriteLine($"ELK push error: {res.Result} {res.DebugInformation} {res.ServerError}");
+                }
+                
+                //var resp = await _client.IndexManyAsync(data, IndexName());
+                //resp.IsValid.AddToActivityAsTag("is-valid");
+                //resp.Errors.AddToActivityAsTag("errors");
+                //if (resp.Errors)
+                //    resp.ItemsWithErrors.Count().AddToActivityAsTag("count-with-errors");
             }
             catch (Exception ex)
             {
