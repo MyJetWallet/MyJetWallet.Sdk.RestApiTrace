@@ -46,6 +46,8 @@ namespace MyJetWallet.Sdk.RestApiTrace
                 sw.Stop();
 
                 using var activity = MyTelemetry.StartActivity("api-trace-log");
+                
+                
 
                 var request = context.Request;
                 var response = context.Response;
@@ -54,6 +56,8 @@ namespace MyJetWallet.Sdk.RestApiTrace
                 clientId.AddToActivityAsTag("clientId");
 
                 string path = request.Path;
+                
+                Console.WriteLine($"detect call: {path}");
 
                 path.AddToActivityAsTag("path");
 
@@ -82,8 +86,6 @@ namespace MyJetWallet.Sdk.RestApiTrace
 
                     ContextHandlerCallback?.Invoke(context, item);
 
-                    Console.WriteLine($"Detect call: {item.Path}");
-                    
                     _apiTraceManager.LogMethodCall(item);
                 }
             }
