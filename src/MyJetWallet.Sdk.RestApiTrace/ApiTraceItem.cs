@@ -11,6 +11,9 @@ namespace MyJetWallet.Sdk.RestApiTrace
         [JsonProperty("@timestamp")]
         [PropertyName("@timestamp")]
         public DateTime timestamp { get; set; }
+        
+        public string index { get; set; }
+        
         public DateTime DateTime { get; set; }
         public string Level { get; set; }
         public string Env { get; set; }
