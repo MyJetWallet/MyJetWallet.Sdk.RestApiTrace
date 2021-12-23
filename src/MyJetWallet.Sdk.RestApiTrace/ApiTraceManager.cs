@@ -92,7 +92,17 @@ namespace MyJetWallet.Sdk.RestApiTrace
                 var index = IndexName();
 
                 data.ForEach(e => e.index = index);
+
+                var bres = await _client.BulkAsync(d => d.IndexMany(data, (d, doc) => d.Index(index)));
                 
+                Console.WriteLine($"ELK res: {bres.Errors}");
+                foreach (var item in bres.ItemsWithErrors)
+                {
+                    Console.WriteLine($"item error: {item.Error}");
+                }
+                
+                
+                /*
                 var resp = await _client.IndexManyAsync(data);
                 Console.WriteLine($"ELK resp: {resp.Errors} {index} {data.Count}");
 
@@ -100,6 +110,7 @@ namespace MyJetWallet.Sdk.RestApiTrace
                 {
                     Console.WriteLine($"error: {item.Error}");
                 }
+                */
                 
                 
                 /*
