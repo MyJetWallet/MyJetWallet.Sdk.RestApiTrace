@@ -96,41 +96,14 @@ namespace MyJetWallet.Sdk.RestApiTrace
                 var bres = await _client
                     .BulkAsync(d => d.CreateMany(data, (d, doc) => 
                         d.Document(doc).Index(index)));
-                
-                Console.WriteLine($"ELK res: {bres.Errors}");
-                foreach (var item in bres.ItemsWithErrors)
-                {
-                    Console.WriteLine($"item error: {item.Error}");
-                }
-                
-                
-                /*
-                var resp = await _client.IndexManyAsync(data);
-                Console.WriteLine($"ELK resp: {resp.Errors} {index} {data.Count}");
 
-                foreach (var item in resp.ItemsWithErrors)
+                if (!bres.Errors)
                 {
-                    Console.WriteLine($"error: {item.Error}");
+                    foreach (var item in bres.ItemsWithErrors)
+                    {
+                        Console.WriteLine($"ELK item error: {item.Error}");
+                    }
                 }
-                */
-                
-                
-                /*
-                foreach (var item in data)
-                {
-                    var res = await _client.IndexAsync(item, descriptor => descriptor.Index(index));
-                    if (!res.IsValid)
-                        Console.WriteLine($"ELK push error: {res.Result} {res.DebugInformation} {res.ServerError}");
-                    else
-                        Console.WriteLine($"ELK push success: {item.Path}");
-                }
-                */
-                
-                //var resp = await _client.IndexManyAsync(data, IndexName());
-                //resp.IsValid.AddToActivityAsTag("is-valid");
-                //resp.Errors.AddToActivityAsTag("errors");
-                //if (resp.Errors)
-                //    resp.ItemsWithErrors.Count().AddToActivityAsTag("count-with-errors");
             }
             catch (Exception ex)
             {

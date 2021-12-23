@@ -9,6 +9,9 @@ namespace TestApp
 {
     class Program
     {
+  
+        
+        
         static void Main(string[] args)
         {
             var settings = new LogElkSettings()
@@ -16,11 +19,11 @@ namespace TestApp
                 Urls = new Dictionary<string, string>()
             };
 
-            settings.Urls["node1"] = "https://192.168.11.4:9200";
-            settings.Urls["node2"] = "https://192.168.11.5:9200";
-            settings.Urls["node3"] = "https://192.168.11.6:9200";
-            settings.User = "spot";
-            settings.Password = "63glAuxUz7h6TUbIR79TOVVcp9vX0id2";
+            settings.Urls["node1"] = "";
+            settings.Urls["node2"] = "";
+            settings.Urls["node3"] = "";
+            settings.User = "";
+            settings.Password = "";
 
             using ILoggerFactory loggerFactory =
                 LoggerFactory.Create(builder =>
@@ -33,7 +36,7 @@ namespace TestApp
 
             ILogger<Program> logger = loggerFactory.CreateLogger<Program>();
 
-            var manager = new ApiTraceManager(settings, "api-trace", logger);
+            var manager = new ApiTraceManager(settings, "api-trace-jet-logs-uat", logger);
 
             manager.Start();
 
@@ -42,6 +45,10 @@ namespace TestApp
 
 
             manager.LogMethodCall(item);
+            manager.LogMethodCall(item);
+            manager.LogMethodCall(item);
+            manager.LogMethodCall(item);
+            
 
             Console.WriteLine("Done");
             Console.ReadLine();

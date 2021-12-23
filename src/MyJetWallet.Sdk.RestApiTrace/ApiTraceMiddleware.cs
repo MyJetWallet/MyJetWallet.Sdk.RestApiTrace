@@ -57,7 +57,7 @@ namespace MyJetWallet.Sdk.RestApiTrace
 
                 string path = request.Path;
                 
-                Console.WriteLine($"detect call: {path}");
+                //Console.WriteLine($"detect call: {path}");
 
                 path.AddToActivityAsTag("path");
 
