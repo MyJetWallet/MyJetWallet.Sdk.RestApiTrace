@@ -93,7 +93,9 @@ namespace MyJetWallet.Sdk.RestApiTrace
 
                 data.ForEach(e => e.index = index);
 
-                var bres = await _client.BulkAsync(d => d.IndexMany(data, (d, doc) => d.Index(index)));
+                var bres = await _client
+                    .BulkAsync(d => d.CreateMany(data, (d, doc) => 
+                        d.Document(doc).Index(index)));
                 
                 Console.WriteLine($"ELK res: {bres.Errors}");
                 foreach (var item in bres.ItemsWithErrors)
