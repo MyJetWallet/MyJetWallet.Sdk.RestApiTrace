@@ -57,11 +57,11 @@ namespace MyJetWallet.Sdk.RestApiTrace
 
                 path.AddToActivityAsTag("path");
 
-                if (path.Contains("api") &&
-                    !path.Contains("isalive") &&
+                if (!path.Contains("isalive") &&
                     !path.Contains("metrics") &&
                     !path.Contains("dependencies") &&
-                    !path.Contains("dependencies"))
+                    !path.Contains("dependencies") &&
+                    !path.Contains("swagger"))
                 {
                     if (!request.Headers.TryGetValue("cf-ipcountry", out var cnCode))
                         cnCode = string.Empty;

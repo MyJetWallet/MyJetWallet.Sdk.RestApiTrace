@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using MyJetWallet.Sdk.Service;
+using Nest;
 
 namespace MyJetWallet.Sdk.RestApiTrace
 {
     public class ApiTraceItem 
     {
+        [PropertyName("@timestamp")]
         public DateTime timestamp { get; set; }
         public DateTime DateTime { get; set; }
         public string Level { get; set; }
@@ -13,7 +15,7 @@ namespace MyJetWallet.Sdk.RestApiTrace
         public string Version { get; set; }
         public string AppName { get; set; }
         public string Path { get; set; }
-        public string Host { get; set; }
+        public string HostUrl { get; set; }
         public string Method { get; set; }
         public string StatusCode { get; set; }
         public string Status { get; set; }

@@ -8,7 +8,7 @@ namespace MyJetWallet.Sdk.RestApiTrace
         public static ApiTraceItem LogRestCall(this ApiTraceItem item, string mehod, string host, string path, HttpStatusCode statusCode, long? executeTimeMs, string userAgent)
         {
             item.Method = mehod;
-            item.Host = host;
+            item.HostUrl = host;
             item.Path = path;
             item.StatusCode = ((int)statusCode).ToString();
             item.Status = statusCode.ToString();

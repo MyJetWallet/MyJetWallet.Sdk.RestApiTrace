@@ -58,8 +58,8 @@ namespace MyJetWallet.Sdk.RestApiTrace
                 var uris = _elkSettings.Urls.Select(e => new Uri(e.Value)).ToArray();
 
 
-                var connectionPool = new SniffingConnectionPool(uris);
-                var settings = new ConnectionSettings(connectionPool)
+                //var connectionPool = new SniffingConnectionPool(uris);
+                var settings = new ConnectionSettings(uris.First())
                     .ServerCertificateValidationCallback(CertificateValidations.AllowAll)
                     .DefaultIndex(_elkIndexPrefix);
 
