@@ -95,6 +95,12 @@ namespace MyJetWallet.Sdk.RestApiTrace
                 
                 var resp = await _client.IndexManyAsync(data);
                 Console.WriteLine($"ELK resp: {resp.Errors} {index} {data.Count}");
+
+                foreach (var item in resp.ItemsWithErrors)
+                {
+                    Console.WriteLine($"error: {item.Error}");
+                }
+                
                 
                 /*
                 foreach (var item in data)
