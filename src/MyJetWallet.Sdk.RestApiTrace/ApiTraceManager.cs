@@ -93,9 +93,10 @@ namespace MyJetWallet.Sdk.RestApiTrace
 
                 data.ForEach(e => e.index = index);
 
-                var bres = await _client
-                    .BulkAsync(d => d.CreateMany(data, (d, doc) => 
-                        d.Document(doc).Index(index)));
+                var bres = await _client.BulkAsync(b => b
+                    .Index(index)
+                    .IndexMany(data)
+                );
 
                 if (!bres.Errors)
                 {
