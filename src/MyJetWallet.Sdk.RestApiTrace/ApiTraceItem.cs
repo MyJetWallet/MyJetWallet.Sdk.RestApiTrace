@@ -13,6 +13,8 @@ namespace MyJetWallet.Sdk.RestApiTrace
         public DateTime timestamp { get; set; }
         
         public string index { get; set; }
+
+        public string op_type { get; set; } = "create";
         
         public DateTime DateTime { get; set; }
         public string Level { get; set; }

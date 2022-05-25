@@ -95,7 +95,7 @@ namespace MyJetWallet.Sdk.RestApiTrace
 
                 var bres = await _client.BulkAsync(b => b
                     .Index(index)
-                    .IndexMany(data)
+                    .CreateMany(data)
                 );
 
                 if (!bres.Errors)
@@ -136,6 +136,9 @@ namespace MyJetWallet.Sdk.RestApiTrace
                 Console.WriteLine("=== API TRACE IS DISABLE, elt node urls is empty ===");
                 return;
             }
+            
+            _logger.LogInformation("API TRACE is started");
+            Console.WriteLine("=== API TRACE is started ===");
 
             _timer.Start();
 
