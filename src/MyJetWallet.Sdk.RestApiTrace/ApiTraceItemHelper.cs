@@ -12,7 +12,7 @@ namespace MyJetWallet.Sdk.RestApiTrace
             item.Path = path;
             item.StatusCode = ((int)statusCode).ToString();
             item.Status = statusCode.ToString();
-            item.ExecuteTimeMs = executeTimeMs?.ToString();
+            item.ExecuteTimeMs = executeTimeMs ?? -1;
             item.UserAgent = userAgent;
 
             return item;
