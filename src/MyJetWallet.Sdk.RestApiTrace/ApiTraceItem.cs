@@ -45,6 +45,7 @@ namespace MyJetWallet.Sdk.RestApiTrace
         public string Span_Id { get; set; }
         public string Trace_Id { get; set; }
         
+        public string RejectCode { get; set; }
 
 
         private ApiTraceItem()
