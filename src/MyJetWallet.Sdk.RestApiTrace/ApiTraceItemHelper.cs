@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 
 namespace MyJetWallet.Sdk.RestApiTrace
@@ -15,6 +16,14 @@ namespace MyJetWallet.Sdk.RestApiTrace
             item.ExecuteTimeMs = executeTimeMs ?? -1;
             item.UserAgent = userAgent;
 
+            var param = userAgent?.Split(';')?.ToList() ?? new ();
+            var version = param.FirstOrDefault() ?? "";
+            if (version.Length > 7)
+            {
+                version = "";
+            }
+            item.ClientAppVersion = version;
+            item.ClientOs = param.Count > 3 ? param[2] : "";
             return item;
         }
 

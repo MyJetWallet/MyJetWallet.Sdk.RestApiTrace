@@ -28,6 +28,8 @@ namespace MyJetWallet.Sdk.RestApiTrace
         public string Status { get; set; }
         public long ExecuteTimeMs { get; set; }
         public string UserAgent { get; set; }
+        public string ClientAppVersion { get; set; }
+        public string ClientOs { get; set; }
 
         public string ExceptionType { get; set; }
         public string ExceptionStack { get; set; }
