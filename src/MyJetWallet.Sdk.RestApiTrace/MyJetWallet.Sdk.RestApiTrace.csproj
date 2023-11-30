@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RepositoryUrl>https://github.com/MyJetWallet/MyJetWallet.Sdk.RestApiTrace</RepositoryUrl>
     
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MyJetWallet.Sdk.Authorization" Version="3.3.0" />
-    <PackageReference Include="MyJetWallet.Sdk.Service" Version="2.5.0" />
+    <PackageReference Include="MyJetWallet.Sdk.Authorization" Version="3.4.1" />
+    <PackageReference Include="MyJetWallet.Sdk.Service" Version="2.6.1" />
     <PackageReference Include="NEST" Version="7.17.5" />
     <PackageReference Include="SimpleTrading.ClientApi" Version="1.1.0" />
   </ItemGroup>
